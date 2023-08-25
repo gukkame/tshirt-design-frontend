@@ -8,8 +8,6 @@
             <label>Width: </label>
             <input id="width" type="number" v-model="width" placeholder="width" @input="submit" />
         </div>
-
-
     </form>
 </template>
 
@@ -27,14 +25,13 @@ export default {
     },
     methods: {
         submit() {
-            console.log("Data submitted");
             this.$store.commit({
                 type: 'setPlacementDimension',
                 name: this.side,
                 width: this.width,
                 height: this.height,
+                centre: { x: this.width / 2, y: this.height / 2 }
             });
-                console.log(this.$store.getters.getPlacement);
         },
     }
 }

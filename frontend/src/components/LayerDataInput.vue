@@ -37,11 +37,11 @@ export default {
     },
     methods: {
         submit() {
-            console.log("Data submitted");
             this.$store.commit({
                 type: 'setLayerData',
                 id: this.elementId,
                 position: { x: this.x, y: this.y },
+                centre: { x: this.x/2, y: this.y/2 },
                 size: this.size,
                 color: this.color,
             })

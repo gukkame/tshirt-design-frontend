@@ -14,7 +14,6 @@ export function drawRectangles(store) {
   })
 }
 export function drawDesignPlacementFront(store, allCanvas) {
-
   const layer = store.getters.getLayer
   const placement = store.getters.getPlacement
 
@@ -23,15 +22,54 @@ export function drawDesignPlacementFront(store, allCanvas) {
     canvas.width = 280
     canvas.height = 280
 
-    console.log(canvas.id)
-    console.log(i)
     ctx.beginPath()
     ctx.rect(1, 1, placement[canvas.id].width, placement[canvas.id].height)
     ctx.lineWidth = 2
     ctx.strokeStyle = '#12e353'
     ctx.stroke()
-  })
 
-  //todo draw dimention border, then calculate where design should be located
+    calculateFrontPlacement(layer, placement[canvas.id], ctx)
+  })
 }
-export function calculateFrontPlacement() {}
+export function calculateFrontPlacement(layers, placement, ctx) {
+
+  for (const layerKey in layers) {
+    if (layers.hasOwnProperty(layerKey)) {
+      const layer = layers[layerKey]
+      var shortestSide
+      var designXpoint
+      var designYpoint
+
+      if (placement.width < placement.height) {
+        shortestSide = placement.width
+
+        designYpoint = placement.height / 2 - shortestSide / 2
+        designXpoint = 0
+      } else {
+        shortestSide = placement.height
+
+        designXpoint = placement.width / 2 - shortestSide / 2
+        designYpoint = 0
+      }
+
+      var designWidth = placement.width - designXpoint * 2
+
+      var layerXPoint = (designWidth * layer.position.x) / 600 + designXpoint
+      var layerYPoint = (designWidth * layer.position.y) / 600 + designYpoint
+
+      var layerWidth = (layer.size * designWidth) / 600
+
+      ctx.beginPath()
+      ctx.rect(layerXPoint, layerYPoint, layerWidth, layerWidth)
+      ctx.lineWidth = 2
+      ctx.fillStyle = layer.color
+      ctx.fill()
+
+      // ctx.beginPath()
+      // ctx.rect(designXpoint, designYpoint, designWidth, designWidth)
+      // ctx.lineWidth = 2
+      // ctx.strokeStyle = '#f248'
+      // ctx.stroke()
+    }
+  }
+}

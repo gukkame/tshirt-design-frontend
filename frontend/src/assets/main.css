@@ -57,11 +57,11 @@ input[type='number'] {
 }
 
 .position-container h3 {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 .position-input {
-  margin: 0 1rem;
+  margin: 0 0.8rem;
 }
 
 .canvas {

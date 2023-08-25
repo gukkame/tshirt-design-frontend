@@ -27,8 +27,8 @@
     </div>
 
     <div class="position-container">
-      <h3>Size px</h3>
-      <label for="x">Side Size: </label>
+      <h3>Size</h3>
+      <label>px: </label>
       <input
         type="number"
         class="position-input"
@@ -64,7 +64,6 @@ export default {
         type: 'setLayerData',
         id: this.elementId,
         position: { x: this.x, y: this.y },
-
         size: this.size,
         color: this.color
       })

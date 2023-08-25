@@ -1,16 +1,28 @@
 
+<script setup>
+import '../assets/main.css'
+import DimensionInput from '../components/dimensionInput.vue'
 
+</script>
 <template>
   <div class="title">
-    <h1 class="green">Tshirt design</h1>
+    <h1>Tshirt design</h1>
   </div>
 
-  <div>
-    <center>
-      <h1>{{ count }}</h1>
-      <button @click="increment">Increment</button>
-    </center>
-  </div>
+  <section class="design">
+    <div>
+      <h1>Design</h1>
+      <h4>Choose 2 rectangle to add to design</h4>
+      <br>
+      <h3>Rectangle 1</h3>
+      <DimensionInput :elementId=0 />
+      <br>
+      <h3>Rectangle 2</h3>
+      <DimensionInput :elementId=1 />
+    </div>
+
+    <canvas ref="canvas" :width="200" :height="300" />
+  </section>
 </template>
 
 
@@ -18,17 +30,10 @@
 export default {
   components: {},
   computed: {
-    count() {
-      return this.$store.getters.getCount
-    }
+    
   },
   methods: {
-    increment() {
-      this.$store.dispatch('changeCount', 1)
-    },
-    reset() {
-      this.$store.dispatch('reset')
-    }
+    
   }
 }
 </script>

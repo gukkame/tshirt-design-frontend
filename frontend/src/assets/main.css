@@ -1,0 +1,30 @@
+@import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  
+  display: flex;
+  flex-direction: column;
+
+  font-weight: normal;
+}
+
+
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
+.design {
+
+  display: flex;
+  flex-direction: row;
+}
+
+#canvas {
+  height: 200px;
+  width: 400px;
+  border: 1px solid gray;
+}

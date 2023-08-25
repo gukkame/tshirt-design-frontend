@@ -2,10 +2,10 @@ import { createStore } from 'vuex'
 const store = createStore({
   state: {
     placements: {
-      'frontSide': { width: 10, height: 0 },
-      'backSide': { width: 20, height: 0 },
-      'rightSleeve': { width: 30, height: 0 },
-      'leftSleeve': { width: 40, height: 0 }
+      'Front': { width: 40, height: 40 },
+      'Back': { width: 20, height: 30 },
+      'Left Sleeve': { width: 40, height: 20 },
+      'Right Sleeve': { width: 30, height: 10 },
     },
     layers: {
       0: { position: { x: 160, y: 120 }, size: 180, color: '#12e353' },
@@ -13,9 +13,6 @@ const store = createStore({
     }
   },
   getters: {
-    getCount(state) {
-      return state.count
-    },
     getPlacement(state) {
       return state.placements
     },

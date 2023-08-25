@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submit">
         <div class="dimensions-container">
-            <h3>Dimension</h3>
+            <h3>{{ side }}</h3>
             <label>Height: </label>
             <input id="height" type="number" v-model="height" placeholder="height" @input="submit" />
 
@@ -20,24 +20,21 @@ export default {
     },
     data() {
         const placements = this.$store.getters.getPlacement;
-        console.log(this.side);
-        console.log(placements['frontSide'].width);
         return {
             width: placements[this.side].width,
             height: placements[this.side].height,
-
         };
     },
     methods: {
         submit() {
             console.log("Data submitted");
-            // this.$store.commit({
-            //     type: 'setLayerData',
-            //     id: this.elementId,
-            //     position: { x: this.x, y: this.y },
-            //     size: this.size,
-            //     color: this.color,
-            // })
+            this.$store.commit({
+                type: 'setPlacementDimension',
+                name: this.side,
+                width: this.width,
+                height: this.height,
+            });
+                console.log(this.$store.getters.getPlacement);
         },
     }
 }

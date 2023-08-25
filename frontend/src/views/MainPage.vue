@@ -27,23 +27,25 @@ import DimensionInput from '../components/dimensionInput.vue'
 
   <section>
     <h1>Placement</h1>
+    <p>Green border indicates design placement dimension</p>
     <container class="placement">
       <div>
-        <canvas class="canvas-placement" id="canvas-front"></canvas>
-        <DimensionInput side="frontSide" />
+        <canvas class="canvas-placement" id="Front"></canvas>
+        <DimensionInput side="Front" />
       </div>
       <div>
-        <canvas class="canvas-placement" id="canvas-back"></canvas>
-        <DimensionInput side="backSide" />
+        <canvas class="canvas-placement" id="Back"></canvas>
+        <DimensionInput side="Back" />
       </div>
       <div>
-        <canvas class="canvas-placement" id="canvas-right"></canvas>
-        <DimensionInput side="rightSleeve" />
+        <canvas class="canvas-placement" id="Left Sleeve"></canvas>
+        <DimensionInput side="Left Sleeve" />
       </div>
       <div>
-        <canvas class="canvas-placement" id="canvas-left"></canvas>
-        <DimensionInput side="leftSleeve" />
+        <canvas class="canvas-placement" id="Right Sleeve"></canvas>
+        <DimensionInput side="Right Sleeve" />
       </div>
+
 
     </container>
 
@@ -52,16 +54,23 @@ import DimensionInput from '../components/dimensionInput.vue'
 
 
 <script>
-import { drawRectangles } from '../helper/drawRectangle';
+import { drawRectangles, drawDesignPlacementFront } from '../helper/drawRectangle';
 
 export default {
   data() {
     return {
-      layers: this.$store.state.layers
+      layers: this.$store.state.layers,
+      placements: this.$store.state.placements
     };
   },
   watch: {
     layers: {
+      handler(newLayers) {
+        this.drawRectangles(newLayers);
+      },
+      deep: true
+    },
+    placements: {
       handler(newLayers) {
         this.drawRectangles(newLayers);
       },
@@ -74,6 +83,12 @@ export default {
   methods: {
     drawRectangles() {
       drawRectangles(this.$store);
+
+      const canvasElements = document.querySelectorAll('canvas');
+      const filteredCanvasElements = Array.from(canvasElements).filter(canvas => canvas.id !== 'canvas');
+
+      drawDesignPlacementFront(this.$store, filteredCanvasElements)
+
     },
   }
 }

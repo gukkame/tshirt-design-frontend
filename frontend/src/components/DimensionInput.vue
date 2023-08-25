@@ -1,50 +1,43 @@
 <template>
     <form @submit.prevent="submit">
-        <div class="position-container">
-            <h3>Position</h3>
-            <label for="x">X: </label>
-            <input id="x" class="position-input" type="number" v-model="x" placeholder="X" @input="submit" />
-            <label for="y">Y: </label>
-            <input id="y" class="position-input" type="number" v-model="y" placeholder="Y" @input="submit" />
+        <div class="dimensions-container">
+            <h3>Dimension</h3>
+            <label>Height: </label>
+            <input id="height" type="number" v-model="height" placeholder="height" @input="submit" />
+
+            <label>Width: </label>
+            <input id="width" type="number" v-model="width" placeholder="width" @input="submit" />
         </div>
 
-        <div class="position-container">
-            <h3>Size px</h3>
-            <label for="x">Side Size: </label>
-            <input type="number" class="position-input" v-model="size" placeholder="size" @input="submit" />
-        </div>
-        <div class="position-container">
-            <h3>Color</h3>
-            <input type="color" class="position-input" v-model="color" @input="submit" />
-        </div>
+
     </form>
 </template>
-
 
 <script>
 export default {
     props: {
-        elementId: Number,
+        side: String,
     },
     data() {
-        const layer = this.$store.getters.getLayer;
+        const placements = this.$store.getters.getPlacement;
+        console.log(this.side);
+        console.log(placements['frontSide'].width);
         return {
-            x: layer[this.elementId].position.x,
-            y: layer[this.elementId].position.y,
-            size: layer[this.elementId].size,
-            color: layer[this.elementId].color,
+            width: placements[this.side].width,
+            height: placements[this.side].height,
+
         };
     },
     methods: {
         submit() {
             console.log("Data submitted");
-            this.$store.commit({
-                type: 'setLayerData',
-                id: this.elementId,
-                position: { x: this.x, y: this.y },
-                size: this.size,
-                color: this.color,
-            })
+            // this.$store.commit({
+            //     type: 'setLayerData',
+            //     id: this.elementId,
+            //     position: { x: this.x, y: this.y },
+            //     size: this.size,
+            //     color: this.color,
+            // })
         },
     }
 }

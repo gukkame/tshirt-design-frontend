@@ -1,6 +1,7 @@
 
 <script setup>
 import '../assets/main.css'
+import LayerDataInput from '../components/LayerDataInput.vue'
 import DimensionInput from '../components/dimensionInput.vue'
 
 </script>
@@ -9,26 +10,51 @@ import DimensionInput from '../components/dimensionInput.vue'
     <h1>Tshirt design</h1>
   </div>
 
-  <section class="design">
+  <section class="design-section">
     <div>
       <h1>Design</h1>
       <h4>Choose 2 rectangle to add to design</h4>
       <br>
       <h2>Rectangle 1</h2>
-      <DimensionInput :elementId=0 />
+      <LayerDataInput :elementId=0 />
       <br>
       <br>
       <h2>Rectangle 2</h2>
-      <DimensionInput :elementId=1 />
+      <LayerDataInput :elementId=1 />
     </div>
     <canvas class="canvas" id="canvas"></canvas>
+  </section>
+
+  <section>
+    <h1>Placement</h1>
+    <container class="placement">
+      <div>
+        <canvas class="canvas-placement" id="canvas-front"></canvas>
+        <DimensionInput side="frontSide" />
+      </div>
+      <div>
+        <canvas class="canvas-placement" id="canvas-back"></canvas>
+        <DimensionInput side="backSide" />
+      </div>
+      <div>
+        <canvas class="canvas-placement" id="canvas-right"></canvas>
+        <DimensionInput side="rightSleeve" />
+      </div>
+      <div>
+        <canvas class="canvas-placement" id="canvas-left"></canvas>
+        <DimensionInput side="leftSleeve" />
+      </div>
+
+    </container>
+
   </section>
 </template>
 
 
 <script>
+import { drawRectangles } from '../helper/drawRectangle';
+
 export default {
-  components: {},
   data() {
     return {
       layers: this.$store.state.layers
@@ -47,20 +73,7 @@ export default {
   },
   methods: {
     drawRectangles() {
-      document.getElementById('canvas').width = 600;
-      document.getElementById('canvas').height = 600;
-
-      const canvas = document.getElementById('canvas');
-      const ctx = canvas.getContext('2d');
-
-      const layer = this.$store.getters.getLayer;
-      Object.entries(layer).forEach(([_, rect]) => {
-        ctx.beginPath();
-        ctx.rect(rect.position.x, rect.position.y, rect.size, rect.size);
-        ctx.fillStyle = rect.color;
-        ctx.fill();
-      });
-
+      drawRectangles(this.$store);
     },
   }
 }

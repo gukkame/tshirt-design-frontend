@@ -2,14 +2,14 @@ import { createStore } from 'vuex'
 const store = createStore({
   state: {
     placements: {
-      Front: { width: 0, height: 0 },
-      Back: { width: 0, height: 0 },
-      'Left sleeve': { width: 0, height: 0 },
-      'Right sleeve': { width: 0, height: 0 }
+      'frontSide': { width: 10, height: 0 },
+      'backSide': { width: 20, height: 0 },
+      'rightSleeve': { width: 30, height: 0 },
+      'leftSleeve': { width: 40, height: 0 }
     },
     layers: {
       0: { position: { x: 160, y: 120 }, size: 180, color: '#12e353' },
-      1: { position: { x: 260, y: 200 }, size: 200, color: '#e66465' },
+      1: { position: { x: 260, y: 200 }, size: 200, color: '#e66465' }
     }
   },
   getters: {

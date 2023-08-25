@@ -12,6 +12,7 @@
 }
 
 
+/* Design section */
 .title {
   font-weight: 500;
   font-size: 1.6rem;
@@ -22,26 +23,33 @@
 }
 
 
-.design {
+.design-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 2rem;
+
+  margin-bottom: 5rem;
 }
 
-.design h1 {
+h1 {
   font-size: 2rem;
 }
 
 input {
   background-color: transparent;
   color: #adadad;
-  border: 1px solid #7c7c7caf;
-  border-radius: 10%;
+  border: none;
   margin-right: 2rem;
   margin-bottom: 0.6rem;
-  max-width: 5rem;
+  max-width: 6rem;
   height: 1.6rem;
 
+}
+
+input[type="number"] {
+  border: 1px solid #7c7c7caf;
+  border-radius: 0.4rem;
+  padding-left: 0.4rem;
 }
 
 .position-container {
@@ -51,11 +59,11 @@ input {
 }
 
 .position-container h3 {
-  margin-right: 10px;
+  margin-right: 1rem;
 }
 
 .position-input {
-  margin: 0 10px;
+  margin: 0 1rem;
 }
 
 .canvas {
@@ -64,7 +72,43 @@ input {
   height: 600px;
 }
 
+
+/* Placement section */
+
+.placement {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 2rem;
+  margin-top: 2rem;
+}
+
+.canvas-placement {
+  border: 1px solid #ffffff;
+  width: 280px;
+  height: 280px;
+}
+
+.dimensions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2ram;
+}
+
+.dimensions-container h3 {
+  margin: 0.3rem 0;
+}
+
+.dimensions-container label {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+
+
+/* Footer */
 footer {
-  position: fixed;
-  bottom: 0;
+  margin-top: 10rem;
+  /* position: fixed;
+  bottom: 0; */
 }

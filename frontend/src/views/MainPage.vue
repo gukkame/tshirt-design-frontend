@@ -14,14 +14,14 @@ import DimensionInput from '../components/dimensionInput.vue'
       <h1>Design</h1>
       <h4>Choose 2 rectangle to add to design</h4>
       <br>
-      <h3>Rectangle 1</h3>
+      <h2>Rectangle 1</h2>
       <DimensionInput :elementId=0 />
       <br>
-      <h3>Rectangle 2</h3>
+      <br>
+      <h2>Rectangle 2</h2>
       <DimensionInput :elementId=1 />
     </div>
-
-    <canvas ref="canvas" :width="200" :height="300" />
+    <canvas class="canvas" id="canvas"></canvas>
   </section>
 </template>
 
@@ -29,28 +29,39 @@ import DimensionInput from '../components/dimensionInput.vue'
 <script>
 export default {
   components: {},
-  computed: {
-    
+  data() {
+    return {
+      layers: this.$store.state.layers
+    };
+  },
+  watch: {
+    layers: {
+      handler(newLayers) {
+        this.drawRectangles(newLayers);
+      },
+      deep: true
+    },
+  },
+  mounted() {
+    this.drawRectangles();
   },
   methods: {
-    
+    drawRectangles() {
+      document.getElementById('canvas').width = 600;
+      document.getElementById('canvas').height = 600;
+
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      const layer = this.$store.getters.getLayer;
+      Object.entries(layer).forEach(([_, rect]) => {
+        ctx.beginPath();
+        ctx.rect(rect.position.x, rect.position.y, rect.size, rect.size);
+        ctx.fillStyle = rect.color;
+        ctx.fill();
+      });
+
+    },
   }
 }
 </script>
-
-<style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.title {
-  text-align: center;
-}
-</style>

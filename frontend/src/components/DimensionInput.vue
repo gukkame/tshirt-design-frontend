@@ -1,41 +1,39 @@
 <template>
     <form @submit.prevent="submit">
-        <h3>Position</h3>
-
-        <input type="number" v-model="x" placeholder="X" />
-        <input type="number" v-model="y" placeholder="Y" />
-
-
-        <h3>Size px</h3>
-        <input type="number" v-model="size" placeholder="size" @input="handleInput" />
-        <div>
-            <h3>Color</h3>
-            <input type="color" v-model="color" />
+        <div class="position-container">
+            <h3>Position</h3>
+            <label for="x">X: </label>
+            <input id="x" class="position-input" type="number" v-model="x" placeholder="X" @input="submit" />
+            <label for="y">Y: </label>
+            <input id="y" class="position-input" type="number" v-model="y" placeholder="Y" @input="submit" />
         </div>
-        <br>
-        <button type="submit">
-            Save
-        </button>
-        <br>
+
+        <div class="position-container">
+            <h3>Size px</h3>
+            <label for="x">Side Size: </label>
+            <input type="number" class="position-input" v-model="size" placeholder="size" @input="submit" />
+        </div>
+        <div class="position-container">
+            <h3>Color</h3>
+            <input type="color" class="position-input" v-model="color" @input="submit" />
+        </div>
     </form>
 </template>
-<script>
 
+
+<script>
 export default {
     props: {
         elementId: Number,
     },
     data() {
+        const layer = this.$store.getters.getLayer;
         return {
-            x: 0,
-            y: 0,
-            size: 0,
-            color: "#e66465",
+            x: layer[this.elementId].position.x,
+            y: layer[this.elementId].position.y,
+            size: layer[this.elementId].size,
+            color: layer[this.elementId].color,
         };
-    },
-    components: {},
-    computed: {
-
     },
     methods: {
         submit() {

@@ -5,14 +5,14 @@ import DimensionInput from '../components/dimensionInput.vue'
 </script>
 <template>
   <div class="title">
-    <h1>T-shirt design</h1>
+    <h1>Design positioning on Canvas</h1>
   </div>
 
   <section class="design-section">
     <div>
       <h1>Design</h1>
       <h4>Choose 2 rectangles to add to design</h4>
-      <h4>Both rectangles must be fully visible, to properly see design placement on other sides!</h4>
+      <h4>Both rectangles must be fully visible, to properly see design placement on each canvas!</h4>
       <br />
       <h2>Rectangle 1</h2>
       <LayerDataInput :elementId="0" />

@@ -1,7 +1,7 @@
 <script setup>
 import '../assets/main.css'
-import LayerDataInput from '../components/LayerDataInput.vue'
-import DimensionInput from '../components/dimensionInput.vue'
+import LayerDataInput from '@/components/LayerDataInput.vue'
+import DimensionInput from '@/components/dimensionInput.vue'
 </script>
 <template>
   <div class="title">
